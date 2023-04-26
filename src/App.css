@@ -2,7 +2,6 @@
   display: inline-block;
   width: 200px;
   height: 260px;
-/*   border: 1px solid #CCC; */
   margin: 40px 0;
   perspective: 600px;
 }
@@ -19,6 +18,7 @@
 
 .card.is-flipped {
   transform: translateX(-100%) rotateY(-180deg);
+  /* transition-duration: 1s; */
 }
 
 .card__face {
@@ -39,5 +39,11 @@
 
 .card__face--back {
   background: slateblue;
-  transform: rotateY(180deg);
+  display: inline-block;
+  width: 200px;
+  height: 260px;
+  perspective: 600px;
+}
+.hide-front-card {
+  display: none;
 }
