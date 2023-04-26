@@ -7,12 +7,9 @@ import { Box, Grid } from "@mui/material";
 export default function CardFlip() {
   const [flipCard, setFlipCard] = useState(true);
 
-  // const handleClick = (event) => {
-  //   setFlipCard((current) => !current);
-  // };
-
-  // <button className={this.state.active && 'active'}
-  //     onClick={ () => this.setState({active: !this.state.active}) }>Click me</button>
+  const handleClick = (event) => {
+    setFlipCard(!flipCard);
+  };
 
   return (
     <>
@@ -21,16 +18,17 @@ export default function CardFlip() {
         <Grid container spacing={2}>
           <Grid item xs={8}>
             <div className="scene scene--card">
-              <div className="card">
-                <div
-                  className={flipCard ? "card__face card__face--front" : ""}
-                  // onClick={handleClick}
-                >
+              <div
+                // className="card"
+                className={!flipCard ? "card " : "card is-flipped"}
+                onClick={handleClick}
+              >
+                <div className={flipCard ? "card__face card__face--front" : ""}>
                   front
                 </div>
                 <div
-                  className={flipCard ? "card__face card__face--back" : ""}
-                  // onClick={handleClick}
+                  className={"card__face card__face--back"}
+                  // className="card__face card__face--back"
                 >
                   back
                 </div>
