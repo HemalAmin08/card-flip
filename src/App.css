@@ -34,7 +34,11 @@
 }
 
 .card__face--front {
-  background: beige;
+  background: crimson;
+  display: inline-block;
+  width: 200px;
+  height: 260px;
+  perspective: 600px;
 }
 
 .card__face--back {
@@ -43,6 +47,12 @@
   width: 200px;
   height: 260px;
   perspective: 600px;
+  line-height: 260px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  transform: scale(-1, 1);
 }
 .hide-front-card {
   display: none;
