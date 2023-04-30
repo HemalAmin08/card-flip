@@ -10,22 +10,32 @@ import cardContent from "./CardContent";
 export default function CardFlip() {
   const [flipCard, setFlipCard] = useState(true);
   const [cardContentData, setCardContentData] = useState([]);
-  const [cardContentItem, setCardContentItem] = useState(cardContent);
+  const [cardContentItem, setCardContentItem] = useState([]);
 
-  const handleClick = (id) => {
+  const handleClick = (id, isFliped) => {
     // console.log(id, "id");
     cardContentItem.forEach((e) => {
-      // console.log(e.id === id, "e map");
-      if (e.id === id) {
-        setFlipCard(!flipCard);
+      e["isFliped"] = false;
+      if (e.name === id && !isFliped) {
+        e["isFliped"] = true;
+      } else if (e.name === id && isFliped) {
+        e["isFliped"] = false;
       }
+      return e;
+    });
+    console.log(cardContentItem, "cardContentItem");
+    setCardContentItem(() => {
+      return [...cardContentItem];
     });
   };
   const handleCardContentData = () => {
     fetch("https://pokeapi.co/api/v2/pokemon")
       .then((res) => res.json())
       .then((json) => {
-        setCardContentData(json);
+        const arrLength = json.results.length;
+        const randomIndex = Math.floor(Math.random() * (arrLength - 4));
+        const randomFive = json.results.slice(randomIndex, randomIndex + 5);
+        setCardContentItem(randomFive);
       });
   };
 
@@ -33,7 +43,7 @@ export default function CardFlip() {
     handleCardContentData();
   }, []);
 
-  // console.log(cardContentData.results, "cardContentData"); // 20 pokemon data
+  // console.log(cardContentItem, "cardContentData"); // 20 pokemon data
 
   return (
     <>
@@ -41,25 +51,25 @@ export default function CardFlip() {
       <Box>
         <Grid container spacing={2}>
           <Grid item x1={4}>
-            {cardContent.map(({ name, id }) => {
+            {cardContentItem.map((val, index) => {
               return (
-                <div className="scene scene--card" key={id}>
+                <div className="scene scene--card" key={index}>
                   <div
-                    className={!flipCard ? "card  is-flipped" : "card"}
+                    className={val.isFliped ? "card  is-flipped" : "card"}
                     onClick={() => {
-                      handleClick(id);
+                      handleClick(val.name, val.isFliped);
                     }}
                   >
                     <div
                       className={
-                        flipCard
+                        !val.isFliped
                           ? "card__face card__face--back"
                           : "card__face--back"
                       }
                     >
-                      {name}
+                      {val.name}
                     </div>
-                    <div className="card__face card__face--front">front</div>
+                    <div className="card__face card__face--front">Front</div>
                   </div>
                 </div>
               );
