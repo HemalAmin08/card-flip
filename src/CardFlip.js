@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
@@ -5,29 +6,13 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./App.css";
 import { Box, Grid } from "@mui/material";
-import cardContent from "./CardContent";
+import { cleanup } from "@testing-library/react";
 
 export default function CardFlip() {
   const [cardContentItem, setCardContentItem] = useState([]);
 
   const handleClick = (value, index) => {
     cardContentItem[index].isFlipped = value;
-
-    //
-    // if (cardContentItem[index]) {
-    //   cardContentItem[index].isFlipped = value;
-    // } else if (cardContentItem[index]) {
-    //   cardContentItem[index].isFlipped = false;
-    // }
-    //
-    // cardContentItem.forEach((e) => {
-    //   if (e.name === name && !isFlipped) {
-    //     e.isFlipped = true;
-    //   } else if (e.name === name && isFlipped) {
-    //     e.isFlipped = false;
-    //   }
-    //   return e;
-    // });
     setCardContentItem([...cardContentItem]);
   };
 
@@ -44,21 +29,36 @@ export default function CardFlip() {
       });
   };
 
+  const handleCloseCard = () => {
+    const newArray = cardContentItem.map((item) => {
+      return { ...item, isFlipped: false };
+    });
+    const timeOut = setTimeout(() => {
+      setCardContentItem(newArray);
+    }, 5000);
+    return timeOut;
+  };
+
+  useEffect(() => {
+    const callFunc = handleCloseCard();
+    return () => {
+      clearTimeout(callFunc);
+    };
+  }, [cardContentItem]);
+
   useEffect(() => {
     handleCardContentData();
   }, []);
-
-  // console.log(cardContentItem, "cardContentItem"); // 20 pokemon data
 
   return (
     <>
       <Navbar />
       <Box>
         <Grid container spacing={2}>
-          <Grid item x1={4}>
-            {cardContentItem.map((val, index) => {
-              return (
-                <div className="scene scene--card" key={index}>
+          {cardContentItem.map((val, index) => {
+            return (
+              <Grid item x1={4} key={index}>
+                <div className="scene scene--card">
                   <div
                     className={val.isFlipped ? "card is-flipped" : "card"}
                     onClick={() => {
@@ -82,9 +82,9 @@ export default function CardFlip() {
                     <div className="card__face card__face--front"></div>
                   </div>
                 </div>
-              );
-            })}
-          </Grid>
+              </Grid>
+            );
+          })}
         </Grid>
       </Box>
     </>
