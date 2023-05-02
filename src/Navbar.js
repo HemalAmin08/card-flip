@@ -4,6 +4,7 @@ import ModeNightSharpIcon from "@mui/icons-material/ModeNightSharp";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleLightMode = () => {
     setToggle(!toggle);
