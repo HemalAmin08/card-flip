@@ -1,8 +1,8 @@
 const cardContent = [
-  { id: 1, name: "Pokemon 1" },
-  { id: 2, name: "Pokemon 2" },
-  { id: 3, name: "Pokemon 3" },
-  { id: 4, name: "Pokemon 4" },
-  { id: 5, name: "Pokemon 5" },
+  { id: 1, name: "bulbasaur" },
+  { id: 2, name: "ivysaur" },
+  { id: 3, name: "kakuna" },
+  { id: 4, name: "raticate" },
+  { id: 5, name: "metapod" },
 ];
 export default cardContent;

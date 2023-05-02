@@ -12,18 +12,19 @@ export default function CardFlip() {
   const [cardContentData, setCardContentData] = useState([]);
   const [cardContentItem, setCardContentItem] = useState([]);
 
-  const handleClick = (id, isFliped) => {
-    // console.log(id, "id");
+  const handleClick = (name, isFlipped) => {
     cardContentItem.forEach((e) => {
-      e["isFliped"] = false;
-      if (e.name === id && !isFliped) {
-        e["isFliped"] = true;
-      } else if (e.name === id && isFliped) {
-        e["isFliped"] = false;
+      // console.log(e, "e");
+      // console.log(name, "id");
+      e["isFlipped"] = false;
+      if (e.name === name && !isFlipped) {
+        e["isFlipped"] = true;
+      } else if (e.name === name && isFlipped) {
+        e["isFlipped"] = false;
       }
       return e;
     });
-    console.log(cardContentItem, "cardContentItem");
+    // console.log(cardContentItem, "cardContentItem");
     setCardContentItem(() => {
       return [...cardContentItem];
     });
@@ -55,21 +56,21 @@ export default function CardFlip() {
               return (
                 <div className="scene scene--card" key={index}>
                   <div
-                    className={val.isFliped ? "card  is-flipped" : "card"}
+                    className={val.isFlipped ? "card  is-flipped" : "card"}
                     onClick={() => {
-                      handleClick(val.name, val.isFliped);
+                      handleClick(val.name, val.isFlipped);
                     }}
                   >
                     <div
                       className={
-                        !val.isFliped
+                        !val.isFlipped
                           ? "card__face card__face--back"
                           : "card__face--back"
                       }
                     >
                       {val.name}
                     </div>
-                    <div className="card__face card__face--front">Front</div>
+                    <div className="card__face card__face--front"></div>
                   </div>
                 </div>
               );
