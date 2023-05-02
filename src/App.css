@@ -28,7 +28,7 @@
   color: white;
   text-align: center;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 20px;
   backface-visibility: hidden;
 }
 
@@ -50,7 +50,7 @@
   color: white;
   text-align: center;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 20px;
   transform: scale(-1, 1);
   position: fixed;
 }
@@ -59,4 +59,13 @@
 }
 .darkMode {
   background-color: #000;
+}
+.img {
+  width: 100px;
+  height: 114px;
+}
+.pokemonName {
+  position: absolute;
+  top: 90px;
+  right: 30%;
 }
