@@ -1,3 +1,90 @@
+:root {
+  --font-color: #000;
+  --background-color: #eee;
+  --link-color: cornflowerblue;
+}
+
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: #000;
+  --link-color: lightblue;
+}
+[data-theme="dark"] .card__face--front {
+  background: linear-gradient(#ffafbd, #ffc3a0);
+}
+[data-theme="dark"] .card__face--back {
+  background: linear-gradient(#eb5757, #000);
+}
+/* 3 */
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+a {
+  color: var(--link-color);
+}
+
+.toggle-theme-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.toggle-theme-wrapper span {
+  font-size: 28px;
+}
+
+.toggle-theme {
+  position: relative;
+  display: inline-block;
+  height: 34px;
+  width: 60px;
+}
+
+.toggle-theme input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  position: absolute;
+  cursor: pointer;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition: 0.2s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+input:checked + .slider {
+  background-color: cornflowerblue;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 .scene {
   display: inline-block;
   width: 200px;
@@ -33,7 +120,7 @@
 }
 
 .card__face--front {
-  background: linear-gradient(#ffafbd, #ffc3a0);
+  background: linear-gradient(#eb5757, #000);
   display: inline-block;
   width: 200px;
   height: 260px;
@@ -41,7 +128,7 @@
 }
 
 .card__face--back {
-  background: linear-gradient(#eb5757, #000);
+  background: linear-gradient(#ffafbd, #ffc3a0);
   display: inline-block;
   width: 200px;
   height: 260px;

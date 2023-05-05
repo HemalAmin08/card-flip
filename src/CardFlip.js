@@ -5,8 +5,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./App.css";
-import { Box, Grid } from "@mui/material";
-import { cleanup } from "@testing-library/react";
+import { Box, Container, Grid } from "@mui/material";
 
 export default function CardFlip() {
   const [cardContentItem, setCardContentItem] = useState([]);
@@ -53,40 +52,42 @@ export default function CardFlip() {
   return (
     <>
       <Navbar />
-      <Box>
-        <Grid container spacing={2}>
-          {cardContentItem.map((val, index) => {
-            return (
-              <Grid item x1={4} key={index}>
-                <div className="scene scene--card">
-                  <div
-                    className={val.isFlipped ? "card is-flipped" : "card"}
-                    onClick={() => {
-                      handleClick(!val.isFlipped, index);
-                    }}
-                  >
+      <Container>
+        <Box>
+          <Grid container spacing={2}>
+            {cardContentItem.map((val, index) => {
+              return (
+                <Grid item x1={4} key={index}>
+                  <div className="scene scene--card">
                     <div
-                      className={
-                        !val.isFlipped
-                          ? "card__face card__face--back"
-                          : "card__face--back"
-                      }
+                      className={val.isFlipped ? "card is-flipped" : "card"}
+                      onClick={() => {
+                        handleClick(!val.isFlipped, index);
+                      }}
                     >
-                      <img
-                        src={`https://img.pokemondb.net/artwork/large/${val.name}.jpg`}
-                        className="img"
-                        alt="img"
-                      />
-                      <p className="pokemonName">{val.name}</p>
+                      <div
+                        className={
+                          !val.isFlipped
+                            ? "card__face card__face--back"
+                            : "card__face--back"
+                        }
+                      >
+                        <img
+                          src={`https://img.pokemondb.net/artwork/large/${val.name}.jpg`}
+                          className="img"
+                          alt="img"
+                        />
+                        <p className="pokemonName">{val.name}</p>
+                      </div>
+                      <div className="card__face card__face--front"></div>
                     </div>
-                    <div className="card__face card__face--front"></div>
                   </div>
-                </div>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+      </Container>
     </>
   );
 }
